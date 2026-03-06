@@ -1,7 +1,5 @@
-
-
-
-COCOV1_classes = {1: 'person',
+coco = {
+     1: 'person',
      2: 'bicycle',
      3: 'car',
      4: 'motorcycle',
@@ -80,17 +78,21 @@ COCOV1_classes = {1: 'person',
      77: 'scissors',
      78: 'teddy bear',
      79: 'hair drier',
-     80: 'toothbrsh'}
+     80: 'toothbrush'
+}
 
+class CoCo :
 
-class COCOV1:
+     def __init__(self):
+          self.fwd = coco
+          self.rev = { v : k for k, v in coco.items() }
 
-    def __init__(self,code : int):
+     def __getattr__(self,key : str):
+          return self.rev[key]
 
-        self.code = code
-        self.name = COCOV1_classes.get(code,f'unknown code {code}')
+     def __getitem__(self,idx : int):
+          return self.fwd[idx]
 
-    def __str__(self):
-        return str(self.name)
+CoCoV1=CoCo()
 
 
